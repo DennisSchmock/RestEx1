@@ -50,7 +50,8 @@ public class GenericResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String postQuote(String q) {
         nextId++;
-        quotes.put(nextId, q);
+        String[] q2 = q.split("=");
+        quotes.put(nextId, q2[1]);
 
         JsonObject quote = new JsonObject();
         quote.addProperty("id", nextId);
@@ -64,11 +65,12 @@ public class GenericResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public String putQuote(@PathParam("id") int id,String q) {
-        quotes.put(id, q);
+        String[] q2 = q.split("=");
+        quotes.put(id, q2[1]);
 
         JsonObject quote = new JsonObject();
         quote.addProperty("id", id);
-        quote.addProperty("quote", q);
+        quote.addProperty("quote", q2[1]);
 
         String jsonResponse = gson.toJson(quote);
         return jsonResponse;
@@ -113,35 +115,9 @@ public class GenericResource {
         return jsonResponse;
     }
 
-    /**
-     * Retrieves representation of an instance of
-     * dk.it2learn.rest1.GenericResource
-     *
-     * @return an instance of java.lang.String
-     */
-    @Path("json")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        return gson.toJson(person);
-    }
+    
 
-    @Path("json")
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void setJson(String p) {
-        person = gson.fromJson(p, Person.class);
-    }
-
-    /**
-     * PUT method for updating or creating an instance of GenericResource
-     *
-     * @param content representation for the resource
-     */
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
+    
 
     private static Map<Integer, String> quotes = new HashMap() {
         {

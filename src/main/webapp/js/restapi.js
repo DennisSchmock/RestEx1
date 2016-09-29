@@ -7,14 +7,28 @@
 $(function () {
     var rootURL = "http://localhost:8085/Rest1/api/quote/";
     loadQuote();
+    $("#quoteForm").hide();
 
 
     $("#btnQuote").click(function () {
         loadQuote();
+        $("#quoteForm").hide();
+
+        $("#edit").fadeIn(250);
+        $("#delete").fadeIn(250);
     });
 
+    $("#addNewQuote").click(function () {
+        $("#quoteForm").fadeToggle(250);
+        $("#edit").hide();
+        $("#delete").hide();
+    });
+
+
+
     $("#btnAdd").click(function (event) {
-        alert("Clicked");
+        window.console.log("adsfsdf");
+
         var formData = {
             'quote': $("#addQuote").val()
         };
@@ -22,14 +36,18 @@ $(function () {
         $.ajax({
             type: 'POST',
             url: rootURL,
-            dataType: json,
+            dataType: "json",
             data: formData,
-            success: loadQuote
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
         });
+        loadQuote();
+        $("#quoteForm").fadeOut(250);
+
 
     });
-
-
 
     function loadQuote() {
         console.log('load quote');
@@ -41,7 +59,7 @@ $(function () {
         });
     }
 
-    
+
     function setQuote(data) {
 
         var list = data == null ? [] : (data instanceof Array ? data : [data]);
@@ -51,8 +69,5 @@ $(function () {
         });
 
     }
-
-
-
 
 });

@@ -9,18 +9,32 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>        
-        <div class="container">
+        <nav class="navbar navbar-default">
 
-            <label id="quote" class="label-info">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Quote of the Day!</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li id="btnQuote"><a href="#">Get new quote</a></li>
+                    <li id="addNewQuote"><a href="#">Add new quote</a></li> 
+                </ul>
+            </div>
+        </nav>    
+        <div class="container col-lg-12">
+
+            <label id="quote"  class="alert alert-danger">
             </label>
 
             <div class="header">
-                
-                <button id="btnQuote">Get Random Quote</button>
-                <button id="btnAdd">New Quote</button>
-                <label for="addQuote"> Write quote here: </label><input type="text" id="addQuote"/>
-                
+                <div id="quoteForm">
+                    <button id="btnAdd">New Quote</button>
+                    <label for="addQuote"> Write quote here: </label><input type="text" id="addQuote"/>
+                </div>
             </div>
+            <button id="edit">Edit quote</button>
+            <button id="delete">Delete quote</button>
+            
 
         </div>
     </body>
