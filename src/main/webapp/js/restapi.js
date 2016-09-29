@@ -10,10 +10,25 @@ $(function () {
 
 
     $("#btnQuote").click(function () {
-      loadQuote();
+        loadQuote();
     });
 
-    
+    $("#btnAdd").click(function (event) {
+        alert("Clicked");
+        var formData = {
+            'quote': $("#addQuote").val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: rootURL,
+            dataType: json,
+            data: formData,
+            success: loadQuote
+        });
+
+    });
+
 
 
     function loadQuote() {
@@ -25,16 +40,8 @@ $(function () {
             success: setQuote
         });
     }
-    
-    function newQuote(){
-        $.ajax({
-            type: 'POST',
-            url: rootURL,
-            dataType: formToJSON(),
-            success: addQuote
-        });
-    }
 
+    
     function setQuote(data) {
 
         var list = data == null ? [] : (data instanceof Array ? data : [data]);
@@ -44,7 +51,7 @@ $(function () {
         });
 
     }
-    
+
 
 
 
